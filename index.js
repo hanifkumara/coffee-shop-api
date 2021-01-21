@@ -13,6 +13,13 @@ app.use(cors())
 app.use('/images', express.static(__dirname + '/images'))
 app.use(bodyParser.urlencoded({ extended: false }))
 
+app.get('/', (req, res) => {
+  res.send({
+    status: 200,
+    message: 'Connected Success',
+    app: 'Coffee Shop'
+  })
+})
 app.use('/api/v1/users', user)
 app.use('/api/v1/products', product)
 app.use('/api/v1/orders', order)
