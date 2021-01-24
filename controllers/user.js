@@ -10,11 +10,11 @@ module.exports = {
   register: async (req, res) => {
     try {
       const user = await userModel.getUserByEmail(req.body.email)
-      // if (user[0]) return res.status(400).send({
-      //   status: 'Failed',
-      //   statusCode: 400,
-      //   message: 'Email already exists!'
-      // })
+      if (user[0]) return res.status(400).send({
+        status: 'Failed',
+        statusCode: 400,
+        message: 'Email already exists!'
+      })
       
       const salt = await bcrypt.genSalt(10)
       const hashedPassword = await bcrypt.hash(req.body.password, salt)
@@ -113,9 +113,10 @@ module.exports = {
   updateUser: async (req, res) => {
     try {
       const user = await userModel.getUserById(req.params.id)
+      console.log('user', user)
       if (!user[0]) {
         if(req.file) {
-          fs.unlinkSync(process.env.BASE_PATH + '/images/' + user[0].image)
+          fs.unlinkSync('./images/' + user[0].image)
         }
         return res.status(404).send({
           status: 'Failed',
@@ -130,7 +131,7 @@ module.exports = {
       }
 
       if (req.file && user[0].image !== 'default.jpg') {
-        fs.unlinkSync(process.env.BASE_PATH + '/images/' + user[0].image)
+        fs.unlinkSync('./images/' + user[0].image)
       }
 
       const newUserData = {

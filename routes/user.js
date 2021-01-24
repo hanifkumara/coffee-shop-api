@@ -26,5 +26,5 @@ module.exports = router
       statusCode: 200,
       message: 'Verification account Success'
     })
-  .patch('/:id', [verifyUser, upload], user.updateUser)
   })
+  .patch('/:id', [verifyUser, upload], user.updateUser)
