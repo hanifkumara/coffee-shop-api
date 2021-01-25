@@ -8,6 +8,7 @@ const { verifyUserModel } = require('../models/user')
 module.exports = router
   .post('/register', user.register)
   .post('/login', user.login)
+  .post('/forgot-password', user.forgotPassword)
   .get('/:id', verifyUser, user.getUserById)
   .get('/confirmation/:token', async (req, res) => {
     try {
@@ -27,4 +28,5 @@ module.exports = router
       message: 'Verification account Success'
     })
   })
+  .patch('/reset-password', user.resetPassword)
   .patch('/:id', [verifyUser, upload], user.updateUser)

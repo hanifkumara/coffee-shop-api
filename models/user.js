@@ -45,5 +45,14 @@ module.exports = {
       .catch(error => {
         throw error
       }) 
+  },
+  updatePassword: (data, id) => {
+    return db(`UPDATE users SET password = '${data.password}' WHERE id  = '${id}'`)
+      .then(result => {
+        return result
+      })
+      .catch(error => {
+        throw error
+      }) 
   }
 }

@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt')
 const { v4: uuid } = require('uuid')
 const jwt = require('jsonwebtoken')
 const fs = require('fs')
-const {sendEmail} = require('../helpers/email')
+const { sendEmail, emailForgotPassword } = require('../helpers/email')
 
 module.exports = {
   register: async (req, res) => {
@@ -20,7 +20,6 @@ module.exports = {
       const hashedPassword = await bcrypt.hash(req.body.password, salt)
       const id = uuid()
       jwt.sign({ user: id }, process.env.JWT_SECRET_KEY, { expiresIn: '1d' }, (err, emailToken) => {
-        console.log(emailToken)
         const url = `${process.env.BASE_URL_FRONTEND}/confirmation-email/${emailToken}`;
         sendEmail(req.body.email, url)
       },
@@ -113,7 +112,6 @@ module.exports = {
   updateUser: async (req, res) => {
     try {
       const user = await userModel.getUserById(req.params.id)
-      console.log('user', user)
       if (!user[0]) {
         if(req.file) {
           fs.unlinkSync('./images/' + user[0].image)
@@ -158,6 +156,78 @@ module.exports = {
         status: 'Failed',
         statusCode: 500,
         message: 'Internal server error!'
+      })
+    }
+  },
+  forgotPassword:  async (req, res) => {
+    try {
+      const { email } = req.body
+      const resEmail = await userModel.getUserByEmail(email)
+      if (resEmail.length < 1) {
+        return res.status(401).send({
+          status: 'Success',
+          statusCode: 401,
+          message: 'Email not found!!'
+        })
+      } else {
+        jwt.sign({ myId: resEmail[0].id }, process.env.JWT_SECRET_KEY, { expiresIn: '1d' }, (err, emailToken) => {
+          const url = `${process.env.BASE_URL_FRONTEND}/auth/create-password/${emailToken}`;
+          emailForgotPassword(email, url)
+          return res.status(201).send({
+            status: 'Success',
+            statusCode: 200,
+            message: 'Send email success!'
+          })
+        })
+      }
+    } catch (err) {
+      console.log(error)
+      return res.status(500).send({
+        status: 'Failed',
+        statusCode: 500,
+        message: 'Internal server error!'
+      })
+    }
+  },
+  resetPassword: (req, res) => {
+    try {
+      const { password } = req.body
+      const authorization = req.headers.authorization
+      if (!authorization) return response(res, 201, null, { message: 'You not have token!!' })
+      let token = authorization.split(' ')
+      token = token[1]
+      jwt.verify(token, process.env.JWT_SECRET_KEY, function (err, decoded) {
+        if (err) {
+          if (err.name === 'JsonWebTokenError') {
+            return res.status(201).send({
+              status: 'Failed',
+              statusCode: 201,
+              message: 'Invalid Token!!'
+            })
+          } else if (err.name === 'TokenExpiredError') {
+            return res.status(500).send({
+              status: 'Failed',
+              statusCode: 500,
+              message: 'Token expred!!'
+            })
+          }
+        }
+        bcrypt.genSalt(10, function (err, salt) {
+          bcrypt.hash(password, salt, async function (err, hash) {
+            await userModel.updatePassword({ password: hash}, decoded.myId)
+            return res.status(201).send({
+              status: 'Success',
+              statusCode: 201,
+              message: 'Reset password success!'
+            })
+          })
+        })
+      })
+    } catch (error) {
+      return res.status(500).send({
+        status: 'Failed',
+        statusCode: 500,
+        message: 'Something went wrong!!!'
       })
     }
   }
