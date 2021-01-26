@@ -2,6 +2,13 @@ const orderModel = require('../models/order')
 const userModel = require('../models/user')
 const { v4: uuid } = require('uuid')
 const productModel = require('../models/product')
+const midtransClient = require('midtrans-client')
+
+let core = new midtransClient.CoreApi({
+  isProduction: false,
+  serverKey: `${process.env.MIDTRANS_SERVER}`,
+  clientKey: `${process.env.MIDTRANS_CLIENT}`
+})
 
 module.exports = {
   addToCart: async (req, res) => {
@@ -84,13 +91,40 @@ module.exports = {
         message: 'No cart found. Try order product'
       })
 
+      const customerDetail = await userModel.getUserById(req.user.userId)
+      console.log('ini detailCustomer', customerDetail)
+
       await orderModel.checkout(req.user.userId, req.body.paymentMethod)
 
-      return res.status(200).send({
-        status: 'Success',
-        statusCode: 200,
-        message: 'Checkout success'
-      })
+      const totalPrice = parseInt(carts[0].subTotal) + parseInt(carts[0].tax)
+      const orderId = uuid()
+      res.send('Yey berhasil :)')
+      const parameter = {
+        "payment_type": "bank_transfer",
+        "bank_transfer": {
+          "bank": "bca"
+        },
+        "transaction_details": {
+          "order_id": `${orderId}`,
+          "gross_amount": totalPrice
+        },
+        "customer_details": {
+          "email": customerDetail[0].email,
+          "first_name": customerDetail[0].firstName,
+          "last_name": customerDetail[0].lastName,
+          "phone": customerDetail[0].mobileNumber
+        }
+      }
+      core.charge(parameter)
+        .then((chargeResponse) => {
+          console.log('chargeResponse:');
+          console.log(chargeResponse);
+          return res.status(200).send({
+            status: 'Success',
+            statusCode: 200,
+            message: 'Checkout success'
+          })
+        });
     } catch (error) {
       console.log(error)
       return res.status(500).send({

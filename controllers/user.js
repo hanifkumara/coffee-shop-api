@@ -173,11 +173,17 @@ module.exports = {
         jwt.sign({ myId: resEmail[0].id }, process.env.JWT_SECRET_KEY, { expiresIn: '1d' }, (err, emailToken) => {
           const url = `${process.env.BASE_URL_FRONTEND}/auth/create-password/${emailToken}`;
           emailForgotPassword(email, url)
-          return res.status(201).send({
-            status: 'Success',
-            statusCode: 200,
-            message: 'Send email success!'
-          })
+            .then(result => {
+              console.log(result)
+              return res.status(201).send({
+                status: 'Success',
+                statusCode: 200,
+                message: 'Send email success!'
+              })
+            })
+            .catch(err => {
+              console.log(err)
+            })
         })
       }
     } catch (err) {
