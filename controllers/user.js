@@ -139,7 +139,7 @@ module.exports = {
         mobileNumber: req.body.mobileNumber || user[0].mobileNumber,
         deliveryAddress: req.body.deliveryAddress || user[0].deliveryAddress,
         gender: req.body.gender || user[0].gender,
-        birthDate: req.body.birthDate || user[0].birthDate,
+        birthDate: req.body.birthDate || user[0].birthDate || null,
         avatar: avatar || user[0].image
       }
 
