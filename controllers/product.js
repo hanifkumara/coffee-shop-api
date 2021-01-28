@@ -172,7 +172,7 @@ module.exports = {
       }
 
       if (req.file && products[0].imageFile !== 'default_product.jpg') {
-        fs.unlinkSync(process.env.BASE_PATH + '/images/' + products[0].imageFile)
+        fs.unlinkSync('./images/' + products[0].imageFile)
       }
 
       const newProductData = {

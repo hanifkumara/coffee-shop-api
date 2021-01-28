@@ -98,7 +98,6 @@ module.exports = {
 
       const totalPrice = parseInt(carts[0].subTotal) + parseInt(carts[0].tax)
       const orderId = uuid()
-      res.send('Yey berhasil :)')
       const parameter = {
         "payment_type": "bank_transfer",
         "bank_transfer": {
@@ -124,9 +123,16 @@ module.exports = {
             statusCode: 200,
             message: 'Checkout success'
           })
-        });
+        })
+        .catch(err => {
+          console.log('error apa ini', err)
+          return res.status(401).send({
+            status: 'Failed',
+            statusCode: 401,
+            message: 'Something went wrong!!'
+          })
+        })
     } catch (error) {
-      console.log(error)
       return res.status(500).send({
         status: 'Failed',
         statusCode: 500,

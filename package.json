@@ -10,7 +10,7 @@
   "keywords": [
     "JavaScript"
   ],
-  "author": "Ahmad Syauqi",
+  "author": "Hanif Kumara",
   "license": "MIT",
   "dependencies": {
     "bcrypt": "^5.0.0",
