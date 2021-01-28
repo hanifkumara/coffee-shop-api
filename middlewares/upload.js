@@ -13,7 +13,7 @@ module.exports = (req, res, next) => {
     }
 
     if (error) {
-      console.lo0g(error)
+      console.log(error)
       return res.status(500).send({
         status: 'Failed',
         statusCode: 500,
