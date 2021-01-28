@@ -29,7 +29,7 @@ module.exports = {
     })
   },
   updateUser: (data, id) => {
-    return db(`UPDATE users SET displayName = '${data.displayName}', firstName = '${data.firstName}', lastName = '${data.lastName}', deliveryAddress = '${data.deliveryAddress}', mobileNumber = '${data.mobileNumber}', avatar = '${data.avatar}', birthDate = '${data.birthDate}', gender = '${data.gender}' WHERE id  = '${id}'`)
+    return db(`UPDATE users SET displayName = '${data.displayName}', firstName = '${data.firstName}', lastName = '${data.lastName}', deliveryAddress = '${data.deliveryAddress}', mobileNumber = '${data.mobileNumber}', avatar = '${data.avatar}', gender = '${data.gender}' WHERE id  = '${id}'`)
     .then(result => {
       return result
     })
