@@ -1,6 +1,6 @@
-# Telegram App Api
+# Coffee Shop
 
-This API is for Telegram App where private chat or group chat in realtime
+This API is for Coffee Shop where order food or drinks easily and quickly
 
 ## Built With
 * [Node.js](https://nodejs.org/en/)
@@ -13,11 +13,11 @@ This API is for Telegram App where private chat or group chat in realtime
 
 ## Installation
 
-Clone this repository and then use the package manager npm to install dependencies.
+Clone this repository and then use the package manager yarn to install dependencies.
 
 
 ```bash
-npm install
+yarn install
 ```
 
 ## Setup .env example
@@ -49,25 +49,35 @@ MIDTRANS_CLIENT=
 Development mode
 
 ```bash
-npm run dev
+yarn run dev
 ```
 
 Deploy mode
 
 ```bash
-npm start
+yarn start
 ```
 
 ## REST API
 
-You can view my Postman collection [here](https://www.getpostman.com/collections/65e37e55e8c3d1a69d55) </br>
-or </br>
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/ddd175d13e4502567620)
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
 Please make sure to update tests as appropriate.
+
+## Project Related
+
+[https://github.com/hanifkumara/coffee-shop-app](https://github.com/hanifkumara/coffee-shop-app)
+
+## Contact
+
+My Email : hanifkumara00@gmail.com
+
+LinkedIn : [https://www.linkedin.com/in/hanifkumara](https://www.linkedin.com/in/hanifkumara/)
+
+Project Link: [https://github.com/hanifkumara/coffee-shop-api](https://github.com/hanifkumara/coffee-shop-api)
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
