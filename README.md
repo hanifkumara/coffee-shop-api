@@ -66,7 +66,9 @@ yarn start
 
 ## REST API
 
-[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/ddd175d13e4502567620)
+You can view my Postman collection [here](https://documenter.getpostman.com/view/14394222/TW6zJ7k6) </br>
+or </br>
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/305e28c7861f7c40ece1)
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
