@@ -1,5 +1,11 @@
 # Coffee Shop
 
+<p align="center">
+  <p align="center">
+    <image align="center" width="200" src='./screenshots/logo coffee shop.PNG' />
+  </p>
+</p>
+
 This API is for Coffee Shop where order food or drinks easily and quickly
 
 ## Built With
