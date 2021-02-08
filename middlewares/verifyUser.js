@@ -16,10 +16,18 @@ module.exports = (req, res, next) => {
 
     return next()
   } catch (error) {
-    return res.status(401).send({
-      status: 'Failed',
-      statusCode: 401,
-      message: 'Access denied!'
-    })
+    if (error) {
+      if (error.name === 'JsonWebTokenError') {
+        return res.status(401).send({
+          statusCode: 401,
+          message: 'Invalid Token' 
+        })
+      } else if (error.name === 'TokenExpiredError') {
+        return res.status(401).send({
+          statusCode: 401,
+          message: 'Token Expired' 
+        })
+      }
+    }
   }
 }
