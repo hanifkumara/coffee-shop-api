@@ -19,9 +19,15 @@ module.exports = {
       const salt = await bcrypt.genSalt(10)
       const hashedPassword = await bcrypt.hash(req.body.password, salt)
       const id = uuid()
-      jwt.sign({ user: id }, process.env.JWT_SECRET_KEY, { expiresIn: '1d' }, (err, emailToken) => {
-        const url = `${process.env.BASE_URL_FRONTEND}/confirmation-email/${emailToken}`;
-        sendEmail(req.body.email, url)
+      jwt.sign({ user: id }, process.env.JWT_SECRET_KEY, { expiresIn: '1d' }, async (err, emailToken) => {
+        try{
+          const url = `${process.env.BASE_URL_FRONTEND}/confirmation-email/${emailToken}`;
+          const result = await sendEmail(req.body.email, url)
+          console.log('Error email', err)
+        }
+        catch(error) {
+          console.log(error)
+        }
       },
       );
 
