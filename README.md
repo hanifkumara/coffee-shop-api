@@ -75,6 +75,44 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 
 Please make sure to update tests as appropriate.
 
+## Contributors
+<center>
+  <table>
+    <tr>
+      <td align="center">
+        <a href="https://github.com/hanifkumara">
+          <img width="150" src="https://avatars.githubusercontent.com/u/55839592?s=400&u=b57fbcb21416c0d12f287ddea5eb5132ad9a293c&v=4" alt="Hanif Kumara"><br/>
+          <b>Hanif Kumara</b>
+        </a>
+      </td>
+      <td align="center">
+        <a href="https://github.com/syauqeesy">
+          <img width="150" src="https://avatars.githubusercontent.com/u/60953607?s=400&u=b9b6bd1a2e7dbb322b34b7d1f126eb9fb2b33891&v=4" alt="Ahmad Syauqi"><br/>
+          <b>Ahmad Syauqi</b>
+        </a>
+      </td>
+      <td align="center">
+        <a href="https://github.com/arbinmaki">
+          <img width="150" src="https://avatars.githubusercontent.com/u/26770607?s=400&u=2af4fbf7c775908919e7f8d0454e95eafee3739f&v=4" alt="Arbi Dwi Wijaya"><br/>
+          <b>Arbi Dwi Wijaya</b>
+        </a>
+      </td>
+      <td align="center">
+        <a href="https://github.com/sintaanggunpuspita">
+          <img width="150" src="https://avatars.githubusercontent.com/u/64903162?s=400&u=57a02bcb7e886e7cf8da30c8775b0b5501da42cb&v=4" alt="Sinta Anggun Puspita"><br/>
+          <b>Sinta Anggun Puspita</b>
+        </a>
+      </td>
+      <td align="center">
+        <a href="https://github.com/slucter">
+          <img width="150" src="https://avatars.githubusercontent.com/u/61655908?s=400&u=1e1c0b55b30cf502f264038f39609fd6dc8636b8&v=4" alt="Muhamad Irhashdianto"><br/>
+          <b>Muhamad Irhashdianto</b>
+        </a>
+      </td>
+    </tr>
+  </table>
+</center>
+
 ## Project Related
 
 [https://github.com/hanifkumara/coffee-shop-app](https://github.com/hanifkumara/coffee-shop-app)
