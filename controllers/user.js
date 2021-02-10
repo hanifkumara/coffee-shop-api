@@ -10,11 +10,11 @@ module.exports = {
   register: async (req, res) => {
     try {
       const user = await userModel.getUserByEmail(req.body.email)
-      if (user[0]) return res.status(400).send({
-        status: 'Failed',
-        statusCode: 400,
-        message: 'Email already exists!'
-      })
+      // if (user[0]) return res.status(400).send({
+      //   status: 'Failed',
+      //   statusCode: 400,
+      //   message: 'Email already exists!'
+      // })
       
       const salt = await bcrypt.genSalt(10)
       const hashedPassword = await bcrypt.hash(req.body.password, salt)
